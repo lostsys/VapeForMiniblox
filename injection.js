@@ -1035,11 +1035,6 @@ function modifyCode(text) {
 			chatdisablermsg = chatdisabler.addoption("Message", String, "youtube.com/c/7GrandDadVape");
 			new Module("FilterBypass", function() {});
 
-			const survival = new Module("SurvivalMode", function(callback) {
-				if (callback) {
-					if (player$1) player$1.setGamemode(GameMode.fromId("survival"));
-					survival.toggle();
-
 			const creative = new Module("CreativeMode", function(callback) {
 				if (callback) {
 					if (player$1) player$1.setGamemode(GameMode.fromId("creative"));
