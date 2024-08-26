@@ -1039,6 +1039,11 @@ function modifyCode(text) {
 				if (callback) {
 					if (player$1) player$1.setGamemode(GameMode.fromId("survival"));
 					survival.toggle();
+
+			const creative = new Module("CreativeMode", function(callback) {
+				if (callback) {
+					if (player$1) player$1.setGamemode(GameMode.fromId("creative"));
+					creative.toggle();
 				}
 			});
 
