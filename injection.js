@@ -399,6 +399,38 @@ function modifyCode(text) {
 	// SWING FIX
 	addReplacement('player$1.getActiveItemStack().item instanceof', 'null == ', true);
 
+        // SPRITE TEST
+        addReplacement('async loadSpritesheet(){', `
+    async loadSpritesheet() {
+        // SPRITESHEET URL
+        const customSpritesheet = await this.loader.loadAsync("https://path-to-your-spritesheet/spritesheet.png");
+        const canvas = document.createElement("canvas");
+
+        canvas.width = SPRITE_WIDTH;
+        canvas.height = SPRITE_HEIGHT;
+
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(customSpritesheet.image, 0, 0);
+
+        this.spritesheetPixels = ctx.getImageData(0, 0, SPRITE_WIDTH, SPRITE_HEIGHT).data;
+
+        customSpritesheet.minFilter = NearestFilter;
+        customSpritesheet.magFilter = NearestFilter;
+        customSpritesheet.colorSpace = LinearSRGBColorSpace;
+
+        const textureMapping = {
+            map: customSpritesheet,
+            side: FrontSide,
+            transparent: false,
+            depthWrite: true,
+            alphaTest: 0.1,
+            vertexColors: true
+        };
+
+        this.customTextureMapping = textureMapping;
+    }
+`, true);
+
 	// COMMANDS
 	addReplacement('tryExecuteClientside(et,_))return;', `
 		const str = $.toLocaleLowerCase();
